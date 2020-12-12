@@ -1,7 +1,9 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -25,8 +27,11 @@ namespace MyAquariumAPI
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<AquariumContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("MyAquariumConnection")));
             services.AddControllers();
-            services.AddScoped<IRepository, MockRepository>();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddScoped<IAquariumRepository, SQLAquariumRepository>();
+            services.AddScoped<IMapper, Mapper>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

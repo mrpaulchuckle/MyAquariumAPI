@@ -1,6 +1,6 @@
-﻿namespace MyAquariumAPI
+﻿namespace MyAquariumAPI.DTO
 {
-    public interface IBaseItem
+    public class BaseItemDTO : IBaseItemDTO
     {
         public int ID { get; set; }
         public string Name { get; set; }

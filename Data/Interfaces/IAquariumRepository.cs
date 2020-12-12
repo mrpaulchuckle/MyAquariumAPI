@@ -2,7 +2,7 @@
 
 namespace MyAquariumAPI.Data
 {
-    public interface IRepository
+    public interface IAquariumRepository
     {
         IEnumerable<ITank> GetAllTanks();
         ITank GetTank(int id);
